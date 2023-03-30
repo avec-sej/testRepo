@@ -30,27 +30,45 @@
 
     let counter = 0;
     
-    function countUp(){
-
-    }
    function App() {
     /*
         const data = React.useState(0);
         //React.useState => Array임  [기초값, 함수]
-        // 함수를 사용해서 계속 render 할 필요없이 UI를 자동으로 update 해줌
         const counter = data[0];
         const modifier = data[1];
+        // 함수를 사용해서 계속 render 할 필요없이 UI를 자동으로 update 해줌
+        //ReactDOM.render(<Container />, root);
     */
-    
-    const [counter, setCounter] = React.useState(0);
-    function onClick(event){
-        setCounter(counter + 1);
-        // setCounter(current + 1);
-    }
-        return (
+   /*
+        #1: session ~3.4
+        const [counter, setCounter] = React.useState(0);
+        function onClick(){
+            //setCounter(counter + 1); // BUG: This is not the best way, because maybe  'counter' can be modified somewhere.
+            setCounter((current) => current + 1);
+        };
+            return (
+                <div>
+                    <h3>Total Click: {counter}</h3>
+                    <button onClick={onClick}>Click me</button>  
+                </div>
+            );
+   */
+   /*
+        #2: seession 3.5
+   */
+        const [minutes, setMinutes] = React.useState();
+        const onChange = (event)=>{
+            //console.log(event.target.value);
+            setMinutes(event.target.value);
+        };
+        return(
             <div>
-                <h3>Total Click: {counter}</h3>
-                <button onClick={onClick}>Click me</button>  
+                <h1 className="title">Super Converter</h1>
+                <label htmlFor="minutes">Minutes</label>
+                <input value={minutes}  id="minutes" placeholder="minutes" type="number" onChange={onChange}/>
+                <h4>You want to convert {minutes}</h4>
+                <label htmlFor="hours">Hours</label>
+                <input id="hours " placeholder="hours" type="number" />
             </div>
         );
    }
