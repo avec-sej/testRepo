@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <div id="root"></div> 
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    function Btn({text, changeValue}) {
+        return (<button 
+                    style={{
+                        backgroundColor: "tomato",
+                        color: "white",
+                        padding: "10px 20px",
+                        border: 0,
+                        borderRadius: 10,
+                    }}
+                    onClick={changeValue}
+                >
+                {text}
+                </button>
+        );
+    }
+
+    /* session 4.1
+        React.useState 하면 모든게 다시 render 해준다고 했다
+        하지만 예를들어 버튼이 1000개가 있다고 했을때, 1개만 수정됬는데 1000개가 다시 re-render되면 느려질뿐 아니라 불필요한 작업이다. 
+        이때 사용하는게 memo 이다.   
+    */
+    const MemorizedBtn = React.memo(Btn);
+    function App(){
+        const [value, setValue] = React.useState("Save Changes");
+        const changeValue = () => {
+            setValue("Revert Value");
+        }
+        /* React.memo() 사용 전
+        return(
+            <div>
+                <Btn text={value} changeValue={changeValue}/>
+                <Btn text="Confirm" />
+            </div>
+        );
+        */
+
+        /* React.memo() 사용 후
+            바뀐 버튼만 re-render된다
+        */
+        return(
+            <div>
+                <MemorizedBtn text={value} changeValue={changeValue}/>
+                <MemorizedBtn  text="Confirm" />
+            </div>
+        );
+   }
+
+   const root = document.querySelector("#root");
+   ReactDOM.render(<App />, root);
+</script>
+</html>

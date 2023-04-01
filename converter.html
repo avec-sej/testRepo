@@ -8,7 +8,7 @@
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
     /*
-        session 3.9
+        #session 3.9
     */
    function MinutesToHours (){
         const [amount, setAmount] = React.useState();
@@ -62,13 +62,20 @@
         const[amount, setAmount] = React.useState();
         const[inverted, setInverted] = React.useState(false);
         const onChange = (evnet) => {
-            setAmount(event.target.value);
+            // setAmount(event.target.value);
+            const value = event.target.value;
+            const onlyNum = value.replace(/[^0-9]/g, '');
+            //ㄴ> input에 숫자만 나오도록 설정하려고 하는데
+            //safari에는 적용안되고, chrome은 되는데 'e'는 허용된다 왜?
+            console.log(onlyNum);
+            setAmount(onlyNum);
         };
         const reset = () => {
             setAmount(0);
         };
         const invert = () => {
-            setInverted(!inverted);
+            // setInverted(!inverted);
+            setInverted((current) => !current);
             reset();
         };
         return(

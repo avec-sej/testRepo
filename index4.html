@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <div id="root"></div> 
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    /*  #sessiong 4.0
+        같은 style을 여러btn에 적용하려면 계속 복사/붙여넣기 할 수 있지만 , better way가 있음.
+    
+    function SaveBtn() {
+        return <button 
+                    style={{
+                        backgroundColor: "tomato",
+                        color: "white",
+                        padding: "10px 20px",
+                        border: 0,
+                        borderRadius: 10, 
+                    }}
+                >
+                Save Changes
+                </button>
+    }
+    function ConfirmBtn() {
+        return <button 
+                    style={{
+                        backgroundColor: "tomato",
+                        color: "white",
+                        padding: "10px 20px",
+                        border: 0,
+                        borderRadius: 10, 
+                    }}
+                >
+                Confirm
+                </button>
+    }
+    */
+
+    function Btn({text, x}) {
+        
+        /*  #1 : function Btn() <- 인자 없을때
+        return (<button 
+                    style={{
+                        backgroundColor: "tomato",
+                        color: "white",
+                        padding: "10px 20px",
+                        border: 0,
+                        borderRadius: 10, 
+                    }}
+                >
+                Save Changes
+                </button>
+        );
+        */
+
+        /*  #2 : function Btn(props) <- 인자 받을때
+                function Btn(여기 argument이름은 내 마음대로 설정하면된다) {...}
+                이때 argument(인자)는 무조건 하나만 온다. 2개는 없음.
+                function Btn(props) =>OK
+                function Btn(props, props2) =>NO!
+
+        return (<button 
+                    style={{
+                        backgroundColor: "tomato",
+                        color: "white",
+                        padding: "10px 20px",
+                        border: 0,
+                        borderRadius: 10, 
+                    }}
+                >
+                {props.text} <= 이런식으로 {인자받을때 설정한 이름. 버튼만들때 넣은 syntax이름}
+                </button>
+        );
+        */
+
+        /*  #3 : function Btn({text}) <-인자 받을때 shortcut : <Btn text=""/ > 여기서 설정한 props 이름 넣기
+            syntax가 여러개면 ','콤마로 구분 : function Btn({text, x})
+        */
+        return (<button 
+                    style={{
+                        backgroundColor: "tomato",
+                        color: "white",
+                        padding: "10px 20px",
+                        border: 0,
+                        borderRadius: 10,
+                        fontSize: x? 18 : 11 
+                    }}
+                >
+                {text}
+                </button>
+        );
+    }
+
+
+    /*
+        Props:
+        내가 만든 컴포넌트 (<Btn />) 옆에 syntax(예: style, onclick,,etc)비슷하게 넣을 수 있는데,
+        이름은 내가 마음대로 설정하면 됨.
+        ex)
+        <Btn text="" />
+        OR
+        <Btn myValue="..." banana="..." /> 여러개 설정 가능.
+        이런식으로 properties를 function으로 넘기게 된다 -> function Btn (myValue="...", banana="...") {...}
+    */
+    function App(){
+        
+        return(
+            <div>
+                <Btn text="Save Changes" x={true}/>
+                <Btn text="Confirm" />
+            </div>
+        );
+   }
+
+   const root = document.querySelector("#root");
+   ReactDOM.render(<App />, root);
+</script>
+</html>
