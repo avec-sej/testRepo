@@ -22,7 +22,7 @@
             const onlyNum = value.replace(/[^0-9]/g, '');
             const test = onlyNum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); // 받은 값에 3자리수마다 콤마를 추가
             console.log(test);
-            setAmount(test); 
+            //setAmount(test); 
         }
         function doReset(){
             setAmount(0);
@@ -52,8 +52,39 @@
         );
     }
     function EurToKrw(){
+        const [amount, setAmount] = React.useState();
+        const getAmount = (event) => {
+            const value = event.target.value;
+            const onlyNum = value.replace(/[^0-9]/g, '');
+            const test = onlyNum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); // 받은 값에 3자리수마다 콤마를 추가
+            console.log(test);
+            //setAmount(test); 
+        }
+        function doReset(){
+            setAmount(0);
+        }
         return (
-            <div>EUR</div>
+        <div>
+            <div>
+                <label>EUR</label>
+                <input 
+                    type="number" 
+                    placeholder="EUR" 
+                    value={amount} 
+                    onChange={getAmount} 
+                />    
+            </div>
+            <div>
+                <label>KRW</label>
+                <input 
+                    type="number" 
+                    placeholder="KRW" 
+                    value={amount} 
+                    onChange={getAmount} 
+                />    
+            </div>
+            <button onClick={doReset}>Reset</button>
+        </div>
         );
     }
 
