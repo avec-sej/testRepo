@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<!-- <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script> -->
+<script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    function UsdToKrw(){
+        const [amount, setAmount] = React.useState();
+        const getAmount = (event) => {
+            const value = event.target.value;
+            const onlyNum = value.replace(/[^0-9]/g, '');
+            const test = onlyNum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); // 받은 값에 3자리수마다 콤마를 추가
+            console.log(test);
+            setAmount(test); 
+        }
+        function doReset(){
+            setAmount(0);
+        }
+        return (
+        <div>
+            <div>
+                <label>USD</label>
+                <input 
+                    type="number" 
+                    placeholder="USD" 
+                    value={amount} 
+                    onChange={getAmount} 
+                />    
+            </div>
+            <div>
+                <label>KRW</label>
+                <input 
+                    type="number" 
+                    placeholder="KRW" 
+                    value={amount} 
+                    onChange={getAmount} 
+                />    
+            </div>
+            <button onClick={doReset}>Reset</button>
+        </div>
+        );
+    }
+    function EurToKrw(){
+        return (
+            <div>EUR</div>
+        );
+    }
+
+    function Exchange(){
+        const [index, setIndex] = React.useState("usd");
+        const onSelect = (event) => {
+            setIndex(event.target.value);
+        }
+        return(
+            <div>
+                <h1>Currency Converter</h1>
+                <select value={index} onChange={onSelect}>
+                    <option value="usd">US dollar(USD)</option>    
+                    <option value="eur">Pound(EUR)</option>    
+                </select> 
+                <hr />
+                {index === "usd"? <UsdToKrw /> : null}
+                {index === "eur"? <EurToKrw /> : null}
+            </div>
+        );
+    }
+
+    const root = document.querySelector("#root");
+    ReactDOM.render(<Exchange />, root);
+</script>
+</html>
