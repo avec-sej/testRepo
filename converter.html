@@ -88,6 +88,8 @@
                         value={inverted? amount/0.621371 : amount} 
                         onChange={onChange} 
                         disabled={inverted}
+                        pattern="/[^0-9]/g"
+                        inputmode="numeric"
                     />
                 </div>
                 <div>
@@ -98,6 +100,8 @@
                         value={inverted? amount : amount*0.621371} 
                         onChange={onChange} 
                         disabled={!inverted}
+                        pattern="/[^0-9]/g"
+                        inputmode="numeric"
                     /> 
                 </div>
                 <button onClick={reset}>Reset</button>

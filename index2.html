@@ -80,6 +80,7 @@
    */
         const [amount, setAmount ] = React.useState();
         const [inverted, setInverted] = React.useState(false);
+        //(event)명은 내가 원하는대로 설정가능
         const onChange = (event)=>{
             //console.log(event.target.value);
             setAmount(event.target.value);
@@ -89,6 +90,7 @@
         };
         const onFlip = () => {
             // setFlipped(!flipped);
+            //(current)명은 내가 원하는대로 설정가능
             reset();
             setInverted((current) => !current);
         };
